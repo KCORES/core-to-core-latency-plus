@@ -18,7 +18,7 @@ pub trait Bench {
     fn is_symmetric(&self) -> bool { true }
 }
 
-pub fn run_bench(cores: &[CoreId], clock: &Clock, args: &CliArgs, bench: impl Bench) {
+pub fn run_bench(cores: &[CoreId], clock: &Clock, args: &CliArgs, bench: impl Bench) -> Option<String> {
     let num_samples = args.num_samples;
     let num_iterations = args.num_iterations;
 
@@ -109,13 +109,24 @@ pub fn run_bench(cores: &[CoreId], clock: &Clock, args: &CliArgs, bench: impl Be
         eprintln!("    Mean latency: {}ns", mcolor.paint(mean));
     }
 
-    if args.csv {
+    let mut csv_data = String::new();
+    if args.csv || args.upload {
         let results = results.mean_axis(Axis(2)).unwrap();
         for row in results.rows() {
             let row = row.iter()
                 .map(|v| if v.is_nan() { "".to_string() } else { v.to_string() })
                 .collect::<Vec<_>>().join(",");
-            println!("{}", row);
+            csv_data.push_str(&row);
+            csv_data.push('\n');
         }
+        if args.csv {
+            println!("{}", csv_data);
+        }
+    }
+
+    if args.upload {
+        Some(csv_data)
+    } else {
+        None
     }
 }
