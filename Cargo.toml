@@ -1,11 +1,11 @@
 [package]
-name = "core-to-core-latency"
-description = "Measures CPU core-to-core latency"
-authors = ["Nicolas Viennot <nicolas@viennot.com>"]
-repository = "https://github.com/nviennot/core-to-core-latency"
+name = "core-to-core-latency-plus"
+description = "This program is used to calculate the communication latency between CPU cores."
+authors = ["Karminski <code.karminski@outlook.com>"]
+repository = "https://github.com/KCORES/core-to-core-latency-plus"
 license = "MIT"
-readme = "README.md"
-version = "1.2.0"
+readme = "README-en-us.md"
+version = "0.1.1"
 edition = "2021"
 exclude = ["/results"]
 
