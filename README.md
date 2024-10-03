@@ -1,5 +1,5 @@
-CPU core-to-core latency tools
-------------------------------
+CPU Core-to-Core Latency Tools +
+--------------------------------
 
 
 ### Desc
@@ -13,142 +13,153 @@ CPU core-to-core latency tools
 该 fork 旨在提升程序的易用性并收集更多 CPU benckmark 数据来进行展示. 
 
 
+*** 注意, 由于 MacOS 已经移除了相关接口, 导致本程序依赖的 core_affinity 库无法在 MacOS 系统上将线程绑定到特定的核心上运行, 同时也无法在运行时获取当前核心 ID. 因此本程序在MacOS 上的测试结果严格来说是无效的 (可能都被调度到了相同的一个或几个核心上). 建议 Mac 用户安装 Linux 系统进行测试 ***
+
+
 
 ### How to run
 
 如何运行:
 
+#### 下载预编译版本并运行
+
+请到 [https://github.com/KCORES/core-to-core-latency-plus/releases](https://github.com/KCORES/core-to-core-latency-plus/releases) 下载.
+
+下载完毕后, Linux 系统运行:
+
 ```
-$ cargo install core-to-core-latency
-$ core-to-core-latency
+core-to-core-latency-plus -b 1 --upload
 ```
 
-### Single socket results 
+Windows 系统需要打开 CMD,  cd 到文件所在目录并运行:
+
+```
+core-to-core-latency-plus.exe -b 1 --upload
+```
+
+#### 使用 cargo 安装并运行
+  
+```
+$ cargo install core-to-core-latency-plus
+$ core-to-core-latency-plus -b 1 --upload
+```
+
+### Leaderboard 
 
 - 按照延迟中间值进行排序, 越小越好
-- 如果一个 CPU 同时存在 P 核和 E 核, 只计算 P 核.
 
-CPU                                                                            | Median Latency | Min Latency | Max Latency 
--------------------------------------------------------------------------------| ------------------------------------------
-AMD Ryzen 9 7950X, 16 Cores, zen4, 2022-Q3                                     | 67.7ns         | 10.3ns      | 73.0ns
-AMD EPYC 7773X, 64 Cores, Milan-X, 2022-Q1                                     | 115.3ns        | 21.3ns      | 139.6ns
-Intel Xeon Gold 6242, 16 Cores, Cascade Lake, 2019-Q2                          | 47.6ns         | 44.6ns      | 58.6ns
-Intel Xeon Phi 7210, 64 Cores, Knights Landing, 2016-Q2                        | 91.0ns         | 41.0ns      | 112.5ns
-HiSilicon Kunpeng 920-6426, 64 cores, ARMv8.2-A, 2019-Q1                       | 71.8ns         | 30.0ns      | 87.7ns
-Intel Core i9-12900K, 8P+8E Cores, Alder Lake, 12th gen, 2021-Q4               | 38.5ns         | 27.8ns      | 50.7ns
-Intel Core i9-9900K, 3.60GHz, 8 Cores, Coffee Lake, 9th gen, 2018-Q4           | 21.0ns         | 17.7ns      | 24.2ns
-Intel Core i7-1165G7, 2.80GHz, 4 Cores, Tiger Lake, 11th gen, 2020-Q3          | 27.4ns         | 26.0ns      | 29.2ns
-Intel Core i7-6700K, 4.00GHz, 4 Cores, Skylake, 6th gen, 2015-Q3               | 20.0ns         | 18.9ns      | 20.9ns
-Intel Core i5-10310U, 4 Cores, Comet Lake, 10th gen, 2020-Q2                   | 20.7ns         | 20.0ns      | 21.4ns
-Intel Core i5-4590, 3.30GHz 4 Cores, Haswell, 4th gen, 2014-Q2                 | 21.2ns         | 20.5ns      | 21.6ns
-Apple M1 Pro, 6P+2E Cores, 2021-Q4                                             | 40.0ns         | 38.3ns      | 40.9ns
-Intel Xeon Platinum 8375C, 2.90GHz, 32 Cores, Ice Lake, 3rd gen, 2021-Q2       | 51.3ns         | 39.7ns      | 62.0ns
-Intel Xeon Platinum 8275CL, 3.00GHz, 24 Cores, Cascade Lake, 2nd gen, 2019-Q2  | 46.8ns         | 41.5ns      | 51.3ns
-Intel Xeon E5-2695 v4, 2.10GHz, 18 Cores, Broadwell, 5th gen, 2016-Q1          | 43.8ns         | 33.9ns      | 50.1ns
-AMD EPYC 7R13, 48 Cores, Milan, 3rd gen, 2021-Q1                               | 106.6ns        | 20.1ns      | 115.9ns 
-AMD Ryzen Threadripper 3960X, 3.80GHz, 24 Cores, Zen 2, 3rd Gen, 2019-Q4       | 94.6ns         | 20.6ns      | 102.8ns 
-AMD Ryzen Threadripper 1950X, 3.40GHz, 16 Cores, Zen, 1st Gen, 2017-Q3         | 153.7ns        | 23.2ns      | 159.1ns
-AMD Ryzen 9 5950X, 3.40GHz, 16 Cores, Zen3, 4th gen, 2020-Q4                   | 17ns, 85ns
-AMD Ryzen 9 5900X, 3.40GHz, 12 Cores, Zen3, 4th gen, 2020-Q4                   | 16ns, 84ns
-AMD Ryzen 7 5800U, 1.9GHz up to 4.4GHz, 8 Cores, Zen3, 4th gen, 2021-Q4        | 19ns
-AMD Ryzen 7 5700X, 3.40GHz, 8 Cores, Zen3, 4th gen, 2022-Q2                    | 18ns
-AMD Ryzen 7 2700X, 3.70GHz, 8 Cores, Zen+, 2nd gen, 2018-Q3                    | 24ns, 92ns
-AMD Ryzen 9 5900HX, 3.3GHz, 8 Cores, Zen3, 4th gen, 2021-Q1                    | 17ns          | 8ns, , 18ns
-AWS Graviton3, 64 Cores, Arm Neoverse, 3rd gen, 2021-Q4                        | 46ns          |
-AWS Graviton2, 64 Cores, Arm Neoverse, 2rd gen, 2020-Q1                        | 47ns          |
-Sun/Oracle SPARC T4, 2.85GHz, 8 cores, 2011-Q3                                 | 98ns          |
-IBM Power7, 3.3GHz, 8 Cores, 2010-Q1                                           | 173ns         |
-IBM PowerPC 970, 1.8GHz, 2 Cores, 2003-Q2                                      | 576ns         |
+| CPU Name                                                                       | Min Latency | Median Latency | Max Latency |
+| :----------------------------------------------------------------------------- | ----------: | -------------: | ----------: |
+| AMD Ryzen 5 5600X 6-Core Processor                                             |      7.6818 |        17.6634 |     21.6557 |
+| AMD Ryzen 7 5700X                                                              |      7.8170 |        18.0319 |     20.5132 |
+| AMD Ryzen 9 5900HX @ 3.3 GHz                                                   |      7.5602 |        18.4311 |     20.8740 |
+| AMD Ryzen 7 5800U                                                              |      7.7068 |        18.9389 |     21.3417 |
+| AMD Ryzen 5 5500 6-Core Processor                                              |     10.3052 |        18.9881 |     22.6321 |
+| AMD Ryzen 7 PRO 5850U 8-Core Processor                                         |      7.7522 |        19.2608 |     22.7955 |
+| Intel Core i7-6700K                                                            |      6.8767 |        19.4800 |     23.3867 |
+| Intel Xeon E-2176M 2.7GHz                                                      |      6.8374 |        20.2670 |     23.0518 |
+| AMD Ryzen 7 5800X3D 8-Core Processor                                           |      7.8564 |        20.3614 |     25.6054 |
+| Intel Core i5-10310U                                                           |      7.2062 |        20.4074 |     21.6365 |
+| Intel Core i9-9900K CPU @ 3.60GHz                                              |      5.9833 |        20.5833 |     24.4833 |
+| AMD Ryzen 5800X3D 8-Core Processor                                             |      5.0000 |        20.6667 |     26.0000 |
+| AMD Ryzen 9 5900HX 8-Core Processor                                            |      5.0000 |        20.6667 |     26.0000 |
+| Intel Core i7-9700K 3.6GHz                                                     |     15.6667 |        20.6667 |     26.0000 |
+| Intel Core i3-4150 3.5GHz                                                      |      5.3333 |        20.6667 |     26.0000 |
+| IntelR CoreTM i5-4590 CPU @ 3.30GHz                                            |     20.4767 |        21.1527 |     21.5759 |
+| Intel Core 2 Duo CPU T7500 2.2GHz                                              |     22.5429 |        22.5429 |     22.5429 |
+| Intel Core i9-9980HK 2.40GHz                                                   |     18.7117 |        22.5849 |     28.2760 |
+| IntelR CoreTM i7-1165G7 @ 2.80GHz                                              |      5.7327 |        26.9433 |     29.4373 |
+| Intel Core i5-1135G7 2.40GHz                                                   |      6.8352 |        27.3317 |     30.7376 |
+| Intel Core i7-12700K                                                           |      4.3645 |        32.2228 |     49.7734 |
+| ZHAOXIN KaiXian KX-6640A 2.6GHz 4 Cores 2019-Q2                                |     32.5470 |        32.5487 |     33.0574 |
+| Intel Core i7-13700KF 3.4GHz                                                   |      4.0925 |        33.9537 |     53.8947 |
+| Intel Celeron 1005M 1.90GHz                                                    |     34.0033 |        34.0033 |     34.0033 |
+| Intel Core i5-8600T 2.3GHz                                                     |     32.8742 |        34.1638 |     35.8292 |
+| Intel Core i5-12600K 3.7GHz                                                    |      4.4808 |        34.4223 |     53.2846 |
+| Intel Core i7-12700H 2.3GHz                                                    |      4.6497 |        35.8870 |     56.8566 |
+| Intel Core i7-14700K 3.4GHz                                                    |      4.1059 |        36.3691 |     99.6469 |
+| Broadcom BCM2837 4-Core 1.2GHz Raspberry Pi 3B                                 |     36.6658 |        36.6658 |     53.3321 |
+| Intel Core i9-12900K                                                           |      4.3483 |        37.1367 |     50.7033 |
+| MCST Elbrus-8C2 8Cores 1.55GHz elbrus-v5                                       |     34.0720 |        37.5935 |     50.0501 |
+| Loongson 3A6000HV 2.5GHz 4 Cores 2023-Q4                                       |     31.8685 |        38.5869 |     38.7137 |
+| Apple.M1.Air                                                                   |     35.9917 |        38.7749 |     47.7950 |
+| Intel Xeon E5-2697v3 HT-off                                                    |     29.3343 |        39.2609 |     47.1590 |
+| Loongson 3A5000HV 2.5GHz 4 Cores 2021-Q3                                       |     39.4932 |        39.5098 |     39.5285 |
+| AMD Custom APU 0405 Valve Steam Deck APU Zen 2 4 cores SMT enabled             |     10.5481 |        40.5395 |     50.6295 |
+| AWS Graviton3 from-AWS-c7g.16xlarge                                            |     29.6008 |        46.4012 |     56.8015 |
+| AWS Graviton2 from-AWS-c6gd.metal                                              |     30.3997 |        47.1996 |     58.3994 |
+| IntelR Xeon Gold 6242 @ 2.8GHz                                                 |      7.3351 |        47.4590 |     58.5769 |
+| Intel Core 2 Quad Processor Q9550 2.83GHz                                      |      0.0000 |        51.6667 |     53.3333 |
+| Loongson 3C5000 2.2GHz 16 Cores 2022-Q2                                        |     47.1933 |        53.2741 |     57.1524 |
+| Apple M1 Ultra                                                                 |     39.6561 |        53.3572 |     84.1167 |
+| m1.ultra.16p4e                                                                 |     39.6561 |        53.3572 |     84.1167 |
+| Intel Xeon W9-3475X 2.2GHz 36Cores 2023-Q2                                     |     36.3929 |        55.3493 |     72.3715 |
+| Dual Intel Xeon Platinum 8360Y 2.40GHz                                         |      7.5606 |        56.7837 |    119.8123 |
+| Qualcomm Snapdragon850                                                         |     57.5972 |        64.2396 |     73.3261 |
+| Qualcomm Snapdragon 855                                                        |     60.8146 |        65.6601 |    364.8424 |
+| AMD Ryzen 9 7950X 16-Core Processor                                            |      5.0000 |        67.6667 |     73.0000 |
+| AMD Ryzen 9 7950X                                                              |      5.0000 |        67.6667 |     73.0000 |
+| Dual IntelR XeonR CPU X5650  @ 2.67GHz                                         |      7.1077 |        70.2779 |     79.6748 |
+| HiSilicon Kunpeng 920-6426 @ 2.6GHz                                            |     29.9564 |        71.7844 |     87.6526 |
+| AMD Ryzen 5 2600 6-Core Processor                                              |     10.3333 |        72.6667 |     99.0000 |
+| AMD Ryzen 9 9950X 16-Core Processor                                            |     17.2814 |        76.3930 |     82.6227 |
+| AMD Ryzen 9 7900X 12-Core Processor                                            |      7.0333 |        77.0833 |     80.7333 |
+| AMD Ryzen 9 5950X 3.40GHz                                                      |      7.3642 |        82.5303 |     88.2414 |
+| AMD Ryzen 9 5900X                                                              |      7.5500 |        82.5500 |     86.9833 |
+| SpacemiT K1 1.60GHz 8-Core                                                     |     32.5704 |        85.3937 |     85.7814 |
+| IntelR AtomTM CPU D510 @ 1.66GHz                                               |     10.6665 |        85.9986 |     86.6652 |
+| AMD Ryzen 9 3900X 12-Core Processor                                            |      6.7759 |        87.2548 |     95.8354 |
+| Broadcom BCM2711 Quad core Cortex-A72 ARM v8 64-bit SoC 1.8GHz Raspberry Pi 4B |     88.9931 |        89.8020 |     89.9820 |
+| AMD Ryzen 7 2700X Eight-Core Processor                                         |      9.5963 |        90.7295 |     94.2679 |
+| IntelR Xeon PhiTM CPU 7210 @ 1.30GHz                                           |     40.9553 |        91.0294 |    112.4597 |
+| AMD Ryzen Threadripper 3960X 3.80GHz 24 Cores Zen 2 3rd Gen 2019-Q4            |      6.3958 |        94.6282 |    104.0642 |
+| IntelR XeonR Platinum 8375C CPU @ 2.90GHz from-AWS-c6i.metal                   |      7.9685 |        98.6915 |    116.8181 |
+| AMD EPYC 74F3 24-Core Processor                                                |      8.9649 |        98.8013 |    107.1125 |
+| Dual Intel Xeon Platinum 8358 CPU 2.60GHz                                      |     41.0048 |        98.9467 |    124.8291 |
+| Dual Intel Xeon Gold 6336Y 2.40GHz                                             |      7.3638 |        99.7868 |    114.1930 |
+| AMD Ryzen Threadripper 3990X 64-Core Processor                                 |     19.1909 |       102.9295 |    112.4265 |
+| AMD Ryzen Threadripper PRO 3945WX 12-Core Processor                            |      6.1877 |       105.0442 |    112.1279 |
+| Intel Xeon Phi 7210 1.30GHz                                                    |     53.1602 |       105.3218 |    113.0751 |
+| Dual IntelR XeonR CPU E5-2690 0 @ 2.90GHz                                      |      8.2683 |       105.4716 |    171.7845 |
+| IntelR XeonR CPU E5-2695 v4 @ 2.10GHz                                          |      7.4887 |       107.2264 |    126.9100 |
+| Dual IntelR XeonR CPU E5-2630 v4 @ 2.20GHz                                     |      8.0845 |       107.8309 |    129.0857 |
+| AMD EPYC 9754 128-Core Processor                                               |     28.8509 |       109.3847 |    119.6138 |
+| AMD EPYC 7773X                                                                 |      9.9268 |       114.8502 |    139.9596 |
+| AMD EPYC 7773X 64-Core Processor                                               |      9.9268 |       114.8502 |    139.9596 |
+| Dual IntelR XeonR CPU E5-2680 v4 @ 2.40GHz                                     |      7.8932 |       117.5104 |    144.9577 |
+| Dual Intel Xeon E5-2698v3 2.3GHz                                               |      5.0000 |       119.6667 |    224.0000 |
+| AMD Ryzen 5 3500X 6-Core Processor                                             |     47.0000 |       120.0000 |    140.6667 |
+| Intel Xeon CPU E5-2695v4 2.10GHz                                               |     35.1843 |       120.1341 |    161.3051 |
+| IntelR XeonR Platinum 8275CL CPU @ 3.00GHz from-AWS-c5.metal                   |      7.4651 |       128.6704 |    139.7132 |
+| Dual Intel Xeon E5 2620V2 2.10GHz                                              |     11.2104 |       130.1963 |    201.5718 |
+| Dual IntelR Xeon Gold 6242 @ 2.8GHz                                            |      7.2657 |       135.1955 |    146.1889 |
+| Apple M1 Pro                                                                   |     38.3332 |       144.1669 |    156.5817 |
+| AMD Ryzen Threadripper 1950X                                                   |      9.9778 |       150.9642 |    160.0195 |
+| AMD Ryzen Threadripper 1950X 16-Core Processor                                 |      9.9395 |       152.7651 |    165.8613 |
+| Dual Ampere Altra Processor Q80-30 CPU 3.0GHz                                  |     67.9924 |       156.2753 |    210.6564 |
+| Quad Intel Xeon E5-4650v2 2.4GHz                                               |     10.7816 |       157.4775 |    176.0418 |
+| Apple M2 Max                                                                   |     37.0688 |       172.0697 |    181.8459 |
+| Dual Ampere Altra Processor Q80-30 CPU 3.0GHz NUMA-off                         |     78.4478 |       179.9726 |    239.3343 |
+| Dual AMD EPYC 9654 96-Core Processor                                           |     24.1957 |       184.6257 |    200.9054 |
+| AMD Ryzen 9 9950X 16-Core Processor                                            |     17.0227 |       190.4729 |    235.5363 |
+| AMD EPYC 7R13 48-Core Processor from-AWS-c6a.metal                             |      9.7475 |       194.5823 |    208.5112 |
+| Dual AMD EPYC 9454 48-Core Processor                                           |     10.3170 |       196.7665 |    207.1196 |
+| Dual AMD EPYC 9754 128-Core Processor                                          |     12.6618 |       202.4880 |    216.0390 |
+| Phytium D2000 8-Core                                                           |     58.6155 |       211.9101 |    223.8014 |
+| Dual AMD EPYC 7302 16-Core Processor                                           |      8.3712 |       227.2905 |    249.2347 |
+| Dual AMD EPYC 7702 64-Core Processor                                           |     24.1273 |       228.9297 |    251.3631 |
+| MCST Elbrus-8C 8Cores 1.2GHz elbrus-v4                                         |     42.7973 |       253.2212 |    320.5725 |
+| NXP LX2160A-RDB 16x Arm Cortex-A72 2.2GHz                                      |     60.0019 |       260.0081 |    273.3420 |
+| Dual AMD EPYC 7742 64-Core Processor                                           |      8.0196 |       260.6432 |    290.4366 |
+| AMD FX-8300 8-Core Processor                                                   |     41.9496 |       267.5885 |    339.6446 |
+| Dual AMD EPYC 7763 64-Core Processor                                           |     10.1847 |       289.4902 |    337.3357 |
+| Dual AMD EPYC 7601 32-Core Processor                                           |     11.4781 |       354.8678 |    429.9534 |
+| Dual Sun-Oracle SPARC T4 8 cores@2.85 GHz                                      |     97.3333 |       355.6667 |    356.3333 |
+| Dual Loongson 3B4000 1.8GHz 8 Cores 2019-Q4                                    |    123.0064 |       368.8299 |    547.2583 |
+| Dual IBM Power7 8 cores@3.3 GHz 2010-Q1                                        |    156.6639 |       433.3258 |    449.9958 |
+| Dual IBM Power9 8335-GTH 16-core 2.7GHz                                        |      0.0000 |       683.3050 |    883.2968 |
 
-### Dual sockets results
----------------------
 
-The following shows dual-socket configuration latency where one CPU on the first socket sends a message to
-another CPU on the second socket.
-The number in parenthesis next to the latency denotes the slowdown compared to single socket.
-
-CPU                                                                            | Median Latency
--------------------------------------------------------------------------------| ------------------
-Intel Xeon Gold 6242, 16 Cores, Cascade Lake, 2019-Q2                          | 136ns (2.8x)
-Intel Xeon Platinum 8375C, 2.90GHz, 32 Cores, Ice Lake, 3rd gen, 2021-Q2       | 108ns (2.1x)
-Intel Xeon Platinum 8275CL, 3.00GHz, 24 Cores, Cascade Lake, 2nd gen, 2019-Q2  | 134ns (2.8x)
-Intel Xeon E5-2695 v4, 2.10GHz, 18 Cores, Broadwell, 5th gen, 2016-Q1          | 118ns (2.7x)
-AMD EPYC 7R13, 48 Cores, Milan, 3rd gen, 2021-Q1                               | 197ns
-Sun/Oracle SPARC T4, 2.85GHz, 8 cores, 2011-Q3                                 | 356ns (3.6x)
-IBM Power7, 3.3GHz, 8 Cores, 2010-Q1                                           | 443ns (2.5x)
-
-### Hyper-threads
--------------
-
-We measure the latency between two hyper-threads of the same core
-
-CPU                                                                            | Median Latency
--------------------------------------------------------------------------------| ------------------
-AMD Ryzen 9 7950X, 16 Cores, zne4, 2022-Q3                                     | 5.3ns
-AMD EPYC 7773X, 64 Cores, Milan-X, 2022-Q1                                     | 10ns
-Intel Xeon Gold 6242, 16 Cores, Cascade Lake, 2019-Q2                          | 7.4ns
-Intel Core i9-12900K, 8+8 Cores, Alder Lake, 12th gen, 2021-Q4                 | 4.3ns
-Intel Core i9-9900K, 3.60GHz, 8 Cores, Coffee Lake, 9th gen, 2018-Q4           | 6.2ns
-Intel Core i7-1165G7, 2.80GHz, 4 Cores, Tiger Lake, 11th gen, 2020-Q3          | 5.9ns
-Intel Core i7-6700K, 4.00GHz, 4 Cores, Skylake, 6th gen, 2015-Q3               | 6.9ns
-Intel Core i5-10310U, 4 Cores, Comet Lake, 10th gen, 2020-Q2                   | 7.3ns
-Intel Xeon Platinum 8375C, 2.90GHz, 32 Cores, Ice Lake, 3rd gen, 2021-Q2       | 8.1ns
-Intel Xeon Platinum 8275CL, 3.00GHz, 24 Cores, Cascade Lake, 2nd gen, 2019-Q2  | 7.6ns
-Intel Xeon E5-2695 v4, 2.10GHz, 18 Cores, Broadwell, 5th gen, 2016-Q1          | 7.6ns
-AMD EPYC 7R13, 48 Cores, Milan, 3rd gen, 2021-Q1                               | 9.8ns
-AMD Ryzen Threadripper 3960X, 3.80GHz, 24 Cores, Zen 2, 3rd Gen, 2019-Q4       | 6.5ns
-AMD Ryzen Threadripper 1950X, 3.40GHz, 16 Cores, Zen, 1st Gen, 2017-Q3         | 10ns
-AMD Ryzen 9 5950X, 3.40GHz, 16 Cores, Zen3, 4th gen, 2020-Q4                   | 7.8ns
-AMD Ryzen 9 5900X, 3.40GHz, 12 Cores, Zen3, 4th gen, 2020-Q4                   | 7.6ns
-AMD Ryzen 7 5700X, 3.40GHz, 8 Cores, Zen3, 4th gen, 2022-Q2                    | 7.8ns
-AMD Ryzen 7 2700X, 3.70GHz, 8 Cores, Zen+, 2nd gen, 2018-Q3                    | 9.7ns
-Sun/Oracle SPARC T4, 2.85GHz, 8 cores, 2011-Q3                                 | 24ns
-IBM Power7, 3.3GHz, 8 Cores, 2010-Q1                                           | 70ns
-
----
-
-**The notebook [results/results.ipynb](results/results.ipynb) contains the code to generate these graphs**
-
-How to use
-----------
-
-First [install Rust](https://www.rust-lang.org/tools/install) and `gcc` on linux, then:
-
-```
-$ cargo install core-to-core-latency
-$ core-to-core-latency
-Num cores: 10
-Using RDTSC to measure time: false
-Num round trips per samples: 1000
-Num samples: 300
-Showing latency=round-trip-time/2 in nanoseconds:
-
-       0       1       2       3       4       5       6       7       8       9
-  0
-  1   52±6
-  2   38±6    39±4
-  3   39±5    39±6    38±6
-  4   34±6    38±4    37±6    36±5
-  5   38±5    38±6    38±6    38±6    37±6
-  6   38±5    37±6    39±6    36±4    49±6    38±6
-  7   36±6    39±5    39±6    37±6    35±6    36±6    38±6
-  8   37±5    38±6    35±5    39±5    38±6    38±5    37±6    37±6
-  9   48±6    39±6    36±6    39±6    38±6    36±6    41±6    38±6    39±6
-
-Min  latency: 34.5ns ±6.1 cores: (4,0)
-Max  latency: 52.1ns ±9.4 cores: (1,0)
-Mean latency: 38.4ns
-```
-
-Contribute
------------
-
-Use `core-to-core-latency 5000 --csv > output.csv` to instruct the program to use
-5000 iterations per sample to reduce the noise, and save the results.
-
-It can be used in the jupter notebook [results/results.ipynb](results/results.ipynb) for rendering graphs.
-
-Create a GitHub issue with the generated `output.csv` file and I'll add your results.
 
 ### License
 

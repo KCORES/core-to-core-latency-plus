@@ -122,8 +122,7 @@ fn upload_results(results: Vec<String>) {
     });
 
     let client = Client::new();
-    // match client.post("https://core-to-core-latency.kcores.com/api/v1/commit")
-    match client.post("http://localhost:9009/commit")
+    match client.post("https://core-to-core-latency.kcores.com/api/v1/commit")
         .json(&payload)
         .send() {
         Ok(response) => {
