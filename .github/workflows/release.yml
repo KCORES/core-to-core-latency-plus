@@ -32,10 +32,10 @@ jobs:
             target: x86_64-pc-windows-msvc
             artifact_name: core-to-core-latency.exe
             asset_name: core-to-core-latency-windows-amd64.exe
-          - os: macos-latest
-            target: x86_64-apple-darwin
-            artifact_name: core-to-core-latency
-            asset_name: core-to-core-latency-macos-amd64
+          # - os: macos-latest
+          #   target: x86_64-apple-darwin
+          #   artifact_name: core-to-core-latency
+          #   asset_name: core-to-core-latency-macos-amd64
           # - os: macos-latest
           #   target: aarch64-apple-darwin
           #   artifact_name: core-to-core-latency
