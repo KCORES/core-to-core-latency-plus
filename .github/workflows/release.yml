@@ -24,10 +24,10 @@ jobs:
             target: x86_64-unknown-linux-gnu
             artifact_name: core-to-core-latency
             asset_name: core-to-core-latency-linux-amd64
-          - os: ubuntu-latest
-            target: aarch64-unknown-linux-gnu
-            artifact_name: core-to-core-latency
-            asset_name: core-to-core-latency-linux-arm64
+          # - os: ubuntu-latest
+          #   target: aarch64-unknown-linux-gnu
+          #   artifact_name: core-to-core-latency
+          #   asset_name: core-to-core-latency-linux-arm64
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             artifact_name: core-to-core-latency.exe
@@ -36,10 +36,10 @@ jobs:
             target: x86_64-apple-darwin
             artifact_name: core-to-core-latency
             asset_name: core-to-core-latency-macos-amd64
-          - os: macos-latest
-            target: aarch64-apple-darwin
-            artifact_name: core-to-core-latency
-            asset_name: core-to-core-latency-macos-arm64
+          # - os: macos-latest
+          #   target: aarch64-apple-darwin
+          #   artifact_name: core-to-core-latency
+          #   asset_name: core-to-core-latency-macos-arm64
 
     steps:
     - name: Checkout repository
