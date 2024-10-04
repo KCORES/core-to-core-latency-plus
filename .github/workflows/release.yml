@@ -48,10 +48,10 @@ jobs:
       run: |
         sudo dpkg --add-architecture arm64
         sudo tee /etc/apt/sources.list.d/arm64.list > /dev/null <<EOT
-        deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -cs) main restricted
-        deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -cs)-updates main restricted
-        deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -cs) universe
-        deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -cs)-updates universe
+        deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -cs) main restricted universe multiverse
+        deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -cs)-updates main restricted universe multiverse
+        deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -cs)-backports main restricted universe multiverse
+        deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -cs)-security main restricted universe multiverse
         EOT
         sudo apt-get update
         sudo apt-get install -y crossbuild-essential-arm64 libssl-dev:arm64
