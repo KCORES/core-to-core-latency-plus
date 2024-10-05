@@ -5,7 +5,7 @@ authors = ["Karminski <code.karminski@outlook.com>"]
 repository = "https://github.com/KCORES/core-to-core-latency-plus"
 license = "MIT"
 readme = "README-en-us.md"
-version = "0.1.15"
+version = "0.1.16"
 edition = "2021"
 exclude = ["/results"]
 

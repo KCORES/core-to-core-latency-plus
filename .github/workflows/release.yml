@@ -68,6 +68,11 @@ jobs:
         command: build
         args: --release --target ${{ matrix.target }}
     
+    - name: Rename artifact
+      run: |
+        mv target/${{ matrix.target }}/release/core-to-core-latency-plus target/${{ matrix.target }}/release/${{ matrix.artifact_name }}
+      shell: bash
+
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:

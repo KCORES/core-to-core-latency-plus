@@ -41,6 +41,8 @@ Note that the --upload option will upload your benchmark results to [https://cor
 
 You can view your results and generate a heatmap using the link generated after the upload is complete.
 
+Considering the substantial size of the historical benchmark dataset (creating a Jupyter Notebook from the "results" folder results in a file of approximately 170MB), we highly recommend uploading the data to the platform for immediate heatmap visualization. For offline access to historical data, please consult [History Results](./results/results.ipynb).
+
 #### install with cargo and run
   
 ```

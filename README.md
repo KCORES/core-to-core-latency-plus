@@ -39,7 +39,9 @@ core-to-core-latency-plus.exe -b 1 --upload
 
 注意, --upload 选项会上传您的 benchmark 结果到 [https://core-to-core-latency.kcores.com](https://core-to-core-latency.kcores.com).  
 
-您可以根据上传完毕后生成的链接来查看您的结果并生成 heapmap.
+您可以根据上传完毕后生成的链接来查看您的结果并生成 heapmap. 
+
+由于 history benchmark 结果过大 (results 文件夹内的内容生成 jupyter notebook 会达到 170MB), 因此强烈建议上传 benchmark 结果到该网站并实时生成 heapmap. 如果您需要手动查看历史结果可以访问 [History Results](./results/results.ipynb).
 
 
 #### 使用 cargo 安装并运行
