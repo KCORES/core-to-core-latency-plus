@@ -8,7 +8,7 @@ on:
 env:
   CARGO_INCREMENTAL: 0
   CARGO_NET_RETRY: 10
-  RUSTFLAGS: "-D warnings -W unreachable-pub"
+  RUSTFLAGS: "-D warnings -A unreachable-pub"
   RUSTUP_MAX_RETRIES: 10
   FETCH_DEPTH: 0
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
@@ -32,10 +32,10 @@ jobs:
             target: x86_64-pc-windows-msvc
             artifact_name: core-to-core-latency.exe
             asset_name: core-to-core-latency-windows-amd64.exe
-          # - os: macos-latest
-          #   target: x86_64-apple-darwin
-          #   artifact_name: core-to-core-latency
-          #   asset_name: core-to-core-latency-macos-amd64
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            artifact_name: core-to-core-latency
+            asset_name: core-to-core-latency-macos-amd64
           # - os: macos-latest
           #   target: aarch64-apple-darwin
           #   artifact_name: core-to-core-latency
