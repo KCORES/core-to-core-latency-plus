@@ -96,13 +96,21 @@ jobs:
 
     - name: Download artifacts
       uses: actions/download-artifact@v4
+      with:
+        path: ./artifacts
 
     - name: Upload Release Assets
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        for asset in core-to-core-latency-plus-*; do
-          gh release upload ${{ github.ref_name }} $asset --clobber
+        cd ./artifacts
+        for asset_dir in */; do
+          asset_file=$(find "$asset_dir" -type f)
+          if [ -f "$asset_file" ]; then
+            gh release upload ${{ github.ref_name }} "$asset_file" --clobber
+          else
+            echo "Warning: No file found in $asset_dir"
+          fi
         done
 
   publish-crates:
