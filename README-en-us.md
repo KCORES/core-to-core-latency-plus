@@ -1,7 +1,7 @@
 CPU Core-to-Core Latency Tools +
 --------------------------------
 
-
+![Loongson-3C5000-2.2GHz-16Cores](./results/Loongson-3C5000-2.2GHz-16Cores.png)
 ### Description
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -37,6 +37,10 @@ for Windows, please open CMD,  cd to file folder and run:
 core-to-core-latency-plus.exe -b 1 --upload
 ```
 
+Note that the --upload option will upload your benchmark results to [https://core-to-core-latency.kcores.com](https://core-to-core-latency.kcores.com).
+
+You can view your results and generate a heatmap using the link generated after the upload is complete.
+
 #### install with cargo and run
   
 ```
@@ -48,6 +52,7 @@ $ core-to-core-latency-plus -b 1 --upload
 
 ### Leaderboard 
 
+For more results, please visit: [https://core-to-core-latency.kcores.com](https://core-to-core-latency.kcores.com)
 
 | CPU Name                                                                       | Min Latency | Median Latency | Max Latency |
 | :----------------------------------------------------------------------------- | ----------: | -------------: | ----------: |
@@ -161,6 +166,9 @@ $ core-to-core-latency-plus -b 1 --upload
 | Dual IBM Power9 8335-GTH 16-core 2.7GHz                                        |      0.0000 |       683.3050 |    883.2968 |
 
 
+### History Results
+
+[History Results](./results/results.ipynb)
 
 ### License
 

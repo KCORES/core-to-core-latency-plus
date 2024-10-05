@@ -39,7 +39,7 @@ pub struct CliArgs {
     #[clap(short, long, require_delimiter=true, value_delimiter=',', value_parser)]
     cores: Vec<usize>,
 
-    /// Upload benchmark results
+    /// Upload benchmark results and generate CPU core-to-core latency heapmap
     #[clap(long)]
     upload: bool,
 }
@@ -105,6 +105,7 @@ fn main() {
 fn upload_results(results: Vec<String>) {
     let cpu_name = utils::get_cpu_brand().unwrap_or_else(|| "Unknown".to_string());
     
+    println!("");
     println!("Please enter your name (or just press Enter for 'anonymous'):");
     let mut commit_by = String::new();
     std::io::stdin().read_line(&mut commit_by).expect("Failed to read input");

@@ -1,7 +1,7 @@
 CPU Core-to-Core Latency Tools +
 --------------------------------
 
-
+![Loongson-3C5000-2.2GHz-16Cores](./results/Loongson-3C5000-2.2GHz-16Cores.png)
 ### Desc
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -37,6 +37,11 @@ Windows 系统需要打开 CMD,  cd 到文件所在目录并运行:
 core-to-core-latency-plus.exe -b 1 --upload
 ```
 
+注意, --upload 选项会上传您的 benchmark 结果到 [https://core-to-core-latency.kcores.com](https://core-to-core-latency.kcores.com).  
+
+您可以根据上传完毕后生成的链接来查看您的结果并生成 heapmap.
+
+
 #### 使用 cargo 安装并运行
   
 ```
@@ -44,7 +49,11 @@ $ cargo install core-to-core-latency-plus
 $ core-to-core-latency-plus -b 1 --upload
 ```
 
+
+
 ### Leaderboard 
+
+更多结果欢迎访问: [https://core-to-core-latency.kcores.com](https://core-to-core-latency.kcores.com)
 
 - 按照延迟中间值进行排序, 越小越好
 
@@ -159,6 +168,11 @@ $ core-to-core-latency-plus -b 1 --upload
 | Dual IBM Power7 8 cores@3.3 GHz 2010-Q1                                        |    156.6639 |       433.3258 |    449.9958 |
 | Dual IBM Power9 8335-GTH 16-core 2.7GHz                                        |      0.0000 |       683.3050 |    883.2968 |
 
+
+### History Results
+
+
+[History Results](./results/results.ipynb)
 
 
 ### License
