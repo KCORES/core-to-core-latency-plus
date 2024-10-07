@@ -3,18 +3,31 @@ mod utils;
 
 use bench::Count;
 use std::sync::Arc;
-use clap::Parser;
+use clap::{Parser};
 use quanta::Clock;
 use crate::bench::run_bench;
 use serde_json::json;
 use reqwest::blocking::Client;
 
-
 const DEFAULT_NUM_SAMPLES: Count = 300;
 const DEFAULT_NUM_ITERATIONS_PER_SAMPLE: Count = 1000;
 
-#[derive(Clone)]
-#[derive(clap::Parser)]
+#[derive(Clone, Parser)]
+#[clap(name = "core-to-core-latency-plus")]
+#[clap(version = env!("CARGO_PKG_VERSION"))]
+#[clap(about = " 
+ ██████╗ ██████╗ ██████╗ ███████╗
+██╔════╝██╔═══██╗██╔══██╗██╔════╝
+██║     ██║   ██║██████╔╝█████╗  
+██║     ██║   ██║██╔══██╗██╔══╝  
+╚██████╗╚██████╔╝██║  ██║███████╗
+ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝ to Core Latency + 
+                                                            
+For leaderboard, please visit: https://core-to-core-latency.kcores.com
+
+SAMPLE USAGE:
+    core-to-core-latency-plus 5000 300 -b 1 --upload
+                                                                       ")]
 pub struct CliArgs {
     /// The number of iterations per sample
     #[clap(default_value_t = DEFAULT_NUM_ITERATIONS_PER_SAMPLE, value_parser)]
