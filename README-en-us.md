@@ -28,13 +28,13 @@ Please download from [https://github.com/KCORES/core-to-core-latency-plus/releas
 for Linux, please run:
 
 ```
-core-to-core-latency-plus -b 1 --upload
+core-to-core-latency-plus 5000 300 -b 1 --upload
 ```
 
 for Windows, please open CMD,  cd to file folder and run:
 
 ```
-core-to-core-latency-plus.exe -b 1 --upload
+core-to-core-latency-plus.exe 5000 300 -b 1 --upload
 ```
 
 Note that the --upload option will upload your benchmark results to [https://core-to-core-latency.kcores.com](https://core-to-core-latency.kcores.com).
@@ -47,7 +47,7 @@ Considering the substantial size of the historical benchmark dataset (creating a
   
 ```
 $ cargo install core-to-core-latency-plus
-$ core-to-core-latency-plus -b 1 --upload
+$ core-to-core-latency-plus 5000 300 -b 1 --upload
 ```
 
 

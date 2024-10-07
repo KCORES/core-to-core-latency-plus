@@ -5,6 +5,7 @@ CPU Core-to-Core Latency Tools +
 ### Desc
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
+[README in English](./README-en-us.md) 
 
 该程序用来计算 CPU 核心间通信延迟.  
 
@@ -28,27 +29,27 @@ CPU Core-to-Core Latency Tools +
 下载完毕后, Linux 系统运行:
 
 ```
-core-to-core-latency-plus -b 1 --upload
+core-to-core-latency-plus 5000 300 -b 1 --upload
 ```
 
 Windows 系统需要打开 CMD,  cd 到文件所在目录并运行:
 
 ```
-core-to-core-latency-plus.exe -b 1 --upload
+core-to-core-latency-plus.exe 5000 300 -b 1 --upload
 ```
 
 注意, --upload 选项会上传您的 benchmark 结果到 [https://core-to-core-latency.kcores.com](https://core-to-core-latency.kcores.com).  
 
 您可以根据上传完毕后生成的链接来查看您的结果并生成 heapmap. 
 
-由于 history benchmark 结果过大 (results 文件夹内的内容生成 jupyter notebook 会达到 170MB), 因此强烈建议上传 benchmark 结果到该网站并实时生成 heapmap. 如果您需要手动查看历史结果可以访问 [History Results](./results/results.ipynb).
+由于 history benchmark 结果过大 (results 文件夹内的内容生成 jupyter notebook 会达到 170MB), 因此强烈建议上传 benchmark 结果到该网站并实时生成 heapmap. 如果您需要手动查看历史结果可以访问 [History Results](./results/results.ipynb) 并安装 python 相关环境后, 使用 jupyter notebook 打开并生成. 
 
 
 #### 使用 cargo 安装并运行
   
 ```
 $ cargo install core-to-core-latency-plus
-$ core-to-core-latency-plus -b 1 --upload
+$ core-to-core-latency-plus 5000 300 -b 1 --upload
 ```
 
 
