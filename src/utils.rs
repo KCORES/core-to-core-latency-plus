@@ -53,10 +53,31 @@ pub fn assert_rdtsc_usable(clock: &quanta::Clock) {
     assert!((0.1..1000.0).contains(&clock_read_overhead), "The timing to read the clock is either not-consistant or too slow");
 }
 
+fn get_cpu_brand_from_proc() -> Option<String> {
+    use std::fs::File;
+    use std::io::{BufRead, BufReader};
+
+    let file = File::open("/proc/cpuinfo").ok()?;
+    let reader = BufReader::new(file);
+
+    for line in reader.lines().flatten() {
+        let line_lower = line.to_lowercase();
+        if line_lower.starts_with("model name") || line_lower.starts_with("hardware") {
+            return line.splitn(2, ':').nth(1).map(|s| s.trim().to_string());
+        }
+    }
+    None
+}
+
 pub fn get_cpu_brand() -> Option<String> {
-    get_cpuid()
-        .and_then(|c| c.get_processor_brand_string())
-        .map(|c| c.as_str().to_string())
+    // only support intel and amd
+    if let Some(cpuid) = get_cpuid() {
+        if let Some(brand) = cpuid.get_processor_brand_string() {
+            return Some(brand.as_str().to_string());
+        }
+    }
+    // fallback to reading /proc/cpuinfo
+    get_cpu_brand_from_proc()
 }
 
 pub fn show_cpuid_info() {
